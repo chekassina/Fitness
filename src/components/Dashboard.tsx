@@ -20,19 +20,12 @@ const platformModules = [
     border: "border-amber-200",
     items: [
       {
-        title: "Fitness Marketplace",
-        description: "Connect to the broader external fitness network and central ecosystem.",
+        title: "Marketplace",
+        description: "Connect to the broader external fitness network, browse and install premium modules, and third-party integrations.",
         icon: Globe,
-        route: "/marketplace/fitness",
+        route: "/marketplace",
         featured: true,
-      },
-      {
-        title: "Marketplace (Premium Module)",
-        description: "Browse and install optional premium modules and third-party integrations.",
-        icon: Layers,
-        route: "/marketplace/premium",
-        featured: true,
-        badge: "Premium"
+        badge: "Premium Ecosystem"
       },
       {
         title: "E-Commerce Store (Gym-Owned Sales)",
@@ -44,21 +37,21 @@ const platformModules = [
     ]
   },
   {
-    category: "Member & Staff Management",
-    description: "Core administration points for your personnel and clients.",
+    category: "Client Management Ecosystem",
+    description: "Core administration portal linked to all types of management for your business.",
     icon: Users,
     color: "text-blue-600",
     bg: "bg-blue-100",
     border: "border-blue-200",
     items: [
       {
-        title: "Member Management",
-        description: "Centralized database for all members.",
+        title: "Client Management Module",
+        description: "Centralized database linking to all types of client and user management platforms.",
         icon: Users,
-        route: "/members",
+        route: "/clients",
         stats: [
-          { label: "Total Members", value: "2,845" },
-          { label: "Active Members", value: "2,512" }
+          { label: "Total Clients", value: "2,845" },
+          { label: "Active Clients", value: "2,512" }
         ],
         wide: true
       },
