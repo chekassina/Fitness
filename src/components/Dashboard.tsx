@@ -37,7 +37,7 @@ const platformModules = [
     ]
   },
   {
-    category: "Client Management Ecosystem",
+    category: "Client Management",
     description: "Core administration portal linked to all types of management for your business.",
     icon: Users,
     color: "text-blue-600",
@@ -45,8 +45,8 @@ const platformModules = [
     border: "border-blue-200",
     items: [
       {
-        title: "Client Management Module",
-        description: "Centralized database linking to all types of client and user management platforms.",
+        title: "Client Management",
+        description: "Centralized database managing memberships, trainers, employees, and payroll integration systems.",
         icon: Users,
         route: "/clients",
         stats: [
@@ -54,31 +54,6 @@ const platformModules = [
           { label: "Active Clients", value: "2,512" }
         ],
         wide: true
-      },
-      {
-        title: "Membership & Subscription Management",
-        description: "Manage plans, tiers, and automated renewals.",
-        icon: Ticket,
-        route: "/subscriptions"
-      },
-      {
-        title: "Trainer Management",
-        description: "Manage coaches, personal trainers, and instructors.",
-        icon: Dumbbell,
-        route: "/trainers",
-        badge: "128 Active"
-      },
-      {
-        title: "Employee Management",
-        description: "HR, roles, tasks, and shift scheduling.",
-        icon: Briefcase,
-        route: "/employees"
-      },
-      {
-        title: "Payroll & Commission Management",
-        description: "Staff payouts, trainer splits, and automated commission.",
-        icon: Calculator,
-        route: "/payroll"
       }
     ]
   },
