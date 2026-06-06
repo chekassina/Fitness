@@ -43,7 +43,7 @@ const navItems = [
   { name: 'Settings', route: '/settings', icon: Settings },
 ];
 
-export function Sidebar({ className, onClose }: { className?: string, onClose?: () => void }) {
+export function Sidebar({ className, onClose, onStoreClick }: { className?: string, onClose?: () => void, onStoreClick?: () => void }) {
   return (
     <aside className={cn("bg-[#0F172A] h-screen flex flex-col text-secondary-400 border-r border-secondary-800 w-64", className)}>
       <div className="h-16 flex items-center justify-between px-6 border-b border-secondary-800 shrink-0">
@@ -62,14 +62,20 @@ export function Sidebar({ className, onClose }: { className?: string, onClose?: 
       
       <div className="flex-1 overflow-y-auto py-4 custom-scrollbar">
         <nav className="px-4 space-y-1 text-[11px] lg:text-xs font-semibold uppercase tracking-wider">
-          {navItems.map((item) => (
-            <a
+          {navItems.map((item) => {
+            const isStore = item.route === '/store';
+            const Tag = isStore ? 'button' : 'a';
+            const extraProps = isStore
+              ? { onClick: onStoreClick, type: 'button' as const }
+              : { href: item.route };
+            return (
+            <Tag
               key={item.name}
-              href={item.route}
+              {...extraProps}
               className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors group",
-                item.active 
-                  ? "bg-primary-600/20 text-primary-400 border border-primary-500/30" 
+                "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors group w-full text-left",
+                item.active
+                  ? "bg-primary-600/20 text-primary-400 border border-primary-500/30"
                   : "hover:bg-secondary-800 hover:text-white border border-transparent"
               )}
             >
@@ -78,8 +84,9 @@ export function Sidebar({ className, onClose }: { className?: string, onClose?: 
                 item.active ? "text-primary-400" : "text-secondary-500 group-hover:text-secondary-300"
               )} />
               <span className="line-clamp-1">{item.name}</span>
-            </a>
-          ))}
+            </Tag>
+            );
+          })}
         </nav>
       </div>
     </aside>

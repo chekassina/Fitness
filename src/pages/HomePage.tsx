@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Dumbbell, Users, TrendingUp, Shield, ArrowRight, CheckCircle,
   BarChart3, CalendarDays, Smartphone, Bot, Star, Play, Globe,
-  Zap, ChevronDown
+  Zap, ChevronDown, ShoppingBag
 } from 'lucide-react';
 
 const stats = [
@@ -60,6 +60,16 @@ const features = [
     color: 'text-cyan-600',
     bg: 'bg-cyan-50',
     border: 'border-cyan-100',
+    isStore: false,
+  },
+  {
+    icon: ShoppingBag,
+    title: 'E-Commerce Store',
+    description: 'Sell gym equipment, supplements, and branded apparel directly to your members with one click.',
+    color: 'text-violet-600',
+    bg: 'bg-violet-50',
+    border: 'border-violet-100',
+    isStore: true,
   },
 ];
 
@@ -87,7 +97,7 @@ const testimonials = [
   },
 ];
 
-export function HomePage({ onLoginClick }: { onLoginClick: () => void }) {
+export function HomePage({ onLoginClick, onStoreClick }: { onLoginClick: () => void; onStoreClick?: () => void }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -113,6 +123,12 @@ export function HomePage({ onLoginClick }: { onLoginClick: () => void }) {
             <a href="#features" className="text-sm font-semibold text-secondary-600 hover:text-primary-600 transition-colors">Features</a>
             <a href="#testimonials" className="text-sm font-semibold text-secondary-600 hover:text-primary-600 transition-colors">Testimonials</a>
             <a href="#pricing" className="text-sm font-semibold text-secondary-600 hover:text-primary-600 transition-colors">Pricing</a>
+            <button
+              onClick={onStoreClick}
+              className="flex items-center gap-1.5 text-sm font-semibold text-secondary-600 hover:text-primary-600 transition-colors"
+            >
+              <ShoppingBag className="w-4 h-4" /> Shop
+            </button>
           </div>
 
           <div className="flex items-center gap-3">
@@ -233,7 +249,8 @@ export function HomePage({ onLoginClick }: { onLoginClick: () => void }) {
             {features.map((feature, i) => (
               <div
                 key={i}
-                className={`group p-6 rounded-2xl border ${feature.border} ${feature.bg} hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-default`}
+                onClick={feature.isStore ? onStoreClick : undefined}
+                className={`group p-6 rounded-2xl border ${feature.border} ${feature.bg} hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${feature.isStore ? 'cursor-pointer' : 'cursor-default'}`}
               >
                 <div className={`w-12 h-12 rounded-xl bg-white border ${feature.border} flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform`}>
                   <feature.icon className={`w-6 h-6 ${feature.color}`} />
@@ -241,7 +258,7 @@ export function HomePage({ onLoginClick }: { onLoginClick: () => void }) {
                 <h3 className="font-bold text-secondary-900 text-base mb-2">{feature.title}</h3>
                 <p className="text-sm text-secondary-500 leading-relaxed">{feature.description}</p>
                 <div className={`mt-4 flex items-center gap-1 text-xs font-bold ${feature.color} opacity-0 group-hover:opacity-100 transition-opacity`}>
-                  Learn more <ArrowRight className="w-3 h-3" />
+                  {feature.isStore ? 'Browse Store' : 'Learn more'} <ArrowRight className="w-3 h-3" />
                 </div>
               </div>
             ))}

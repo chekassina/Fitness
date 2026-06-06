@@ -95,7 +95,7 @@ const features = [
   }
 ];
 
-export function Dashboard() {
+export function Dashboard({ onStoreClick }: { onStoreClick?: () => void }) {
   return (
     <div className="min-h-screen bg-secondary-50/50 p-4 md:p-8 lg:p-12">
       <div className="max-w-[1600px] mx-auto space-y-12 pb-24">
@@ -110,13 +110,19 @@ export function Dashboard() {
 
         {/* Modules Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-          {features.map((item, itemIdx) => (
-            <a
+          {features.map((item, itemIdx) => {
+            const isStore = item.route === '/store';
+            const Tag = isStore ? 'button' : 'a';
+            const extraProps = isStore
+              ? { onClick: onStoreClick, type: 'button' as const }
+              : { href: item.route };
+            return (
+            <Tag
               key={itemIdx}
-              href={item.route}
+              {...extraProps}
               className={cn(
                 "group relative flex flex-col bg-white rounded-2xl p-6 transition-all duration-300",
-                "border border-secondary-200 hover:border-primary-400 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1 block",
+                "border border-secondary-200 hover:border-primary-400 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1 w-full text-left",
                 item.wide ? "md:col-span-2" : "col-span-1",
                 item.featured ? "border-2 border-amber-200/50 bg-gradient-to-b from-amber-50/30 to-white shadow-sm" : ""
               )}
@@ -155,8 +161,9 @@ export function Dashboard() {
                 <span className="text-xs font-bold text-secondary-400 group-hover:text-primary-600 transition-colors uppercase tracking-wider">Launch Platform</span>
                 <ArrowUpRight className="w-4 h-4 text-secondary-300 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
               </div>
-            </a>
-          ))}
+            </Tag>
+            );
+          })}
         </div>
 
         {/* Platform Uptime Section */}
